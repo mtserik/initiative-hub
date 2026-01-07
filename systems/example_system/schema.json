@@ -1,0 +1,16 @@
+{
+  "name": "Example RPG System",
+  "version": "1.0",
+  "description": "Example system used to validate the RPG architecture.",
+
+  "character_schema": {
+    "attributes": {
+      "strength": { "type": "number", "min": 1, "max": 20 },
+      "dexterity": { "type": "number", "min": 1, "max": 20 }
+    },
+    "health": {
+      "current": { "type": "number", "min": 0 },
+      "max": { "type": "number", "min": 1 }
+    }
+  }
+}
