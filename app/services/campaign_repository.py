@@ -1,4 +1,4 @@
-from app.services.db import get_connection
+from services.db import get_connection
 
 
 def list_campaigns_by_user(user_id: str) -> list[dict]:
