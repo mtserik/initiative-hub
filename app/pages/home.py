@@ -1,26 +1,26 @@
 import streamlit as st
-from app.services.campaign_repository import list_campaigns_by_user
+from services.campaign_repository import list_campaigns_by_user
 
-st.header('Home')
-st.caption('Validação inicial de campanhas')
+st.header("🏠 Home")
 
-st.divider()
+user = st.session_state.get("user")
 
-# UUID MOCK
-USER_ID = '11111111-1111-1111-1111-111111111111'
+if not user:
+    st.warning("Você precisa estar logado para acessar esta página.")
+    st.stop()
 
-campaigns = list_campaigns_by_user(USER_ID)
+campaigns = list_campaigns_by_user(user["id"])
+
+st.subheader("🎲 Minhas campanhas")
 
 if not campaigns:
-    st.info('Nenhuma campanha encontrada.')
+    st.info("Nenhuma campanha encontrada.")
 else:
-    st.subheader('🎲 Minhas campanhas')
-    
     for campaign in campaigns:
         with st.container(border=True):
             st.markdown(f"### {campaign['name']}")
-            st.write(campaign['description'] or '_Sem descrição_')
-            
+            st.write(campaign["description"] or "_Sem descrição_")
+
             cols = st.columns(3)
             cols[0].markdown(f"**Sistema:** {campaign['system_key']}")
             cols[1].markdown(f"**Papel:** {campaign['role']}")
